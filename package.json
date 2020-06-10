@@ -33,11 +33,13 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Lane Olson",
+  "homepage": "laneolson.ca",
   "license": "MIT",
   "repository": "",
   "keywords": [
-    "react-component"
+    "zustand",
+    "data store",
+    "react"
   ]
 }
