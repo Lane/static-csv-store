@@ -34,7 +34,7 @@
     "react-dom": "^16.13.1"
   },
   "author": "Lane Olson",
-  "homepage": "https://github.com/Lane/static-csv-store",
+  "homepage": "https://static-csv-store-demo.surge.sh/",
   "license": "MIT",
   "repository": "",
   "keywords": [
