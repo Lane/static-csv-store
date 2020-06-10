@@ -1,6 +1,6 @@
 {
   "name": "static-csv-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A static file data store for react components that handles data loading and selection",
   "main": "lib/index.js",
   "module": "es/index.js",
