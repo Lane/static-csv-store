@@ -20,7 +20,7 @@ import createCsvStore from "static-csv-store";
 // create the store
 const [useStore] = createCsvStore(
   // endpoint
-  "https://data.edopportunity.org/dev/scatterplot/meta/schools",
+  "https://data.source.org/schools",
   // csv columns to store
   ["id", "name", "lat", "lon"]
 );
@@ -59,7 +59,7 @@ import createCsvStore from "static-csv-store";
 // create the store
 const [useStore] = createCsvStore(
   // endpoint
-  "https://data.edopportunity.org/dev/scatterplot/meta/schools",
+  "https://data.source.org/schools",
   // csv columns to store
   ["id", "name", "lat", "lon"]
 );
