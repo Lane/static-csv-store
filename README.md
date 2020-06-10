@@ -49,7 +49,7 @@ See [zustand](https://github.com/react-spring/zustand) documentation on how to u
 
 Take a look at the [demo](https://static-csv-store-demo.surge.sh/) (`/demo/src`) for a closer look at how to use the store.
 
-1. Create a store for CSV data
+### 1. Create a store for CSV data
 
 **File:** `store.js`
 
@@ -57,7 +57,7 @@ Take a look at the [demo](https://static-csv-store-demo.surge.sh/) (`/demo/src`)
 import createCsvStore from "static-csv-store";
 
 // create the store
-const [useStore] = createCsvStore(
+const [useStore, _api] = createCsvStore(
   // endpoint
   "https://data.source.org/schools",
   // csv columns to store
@@ -79,17 +79,20 @@ export const useData = (options = {}) => {
   return selectData({ data, columnMap, ...options });
 };
 
+// provide api for use outside of React
+export const api = _api;
+
 // provide store
 export default useStore;
 ```
 
-2. Use the store in a component
+### 2a. Use the store in a React component
 
 ```js
 import { useLoader, useData } from "./store";
 
 // component re-renders any time data changes
-export default function County({ county }) {
+export default function Schools({ currentCounty }) {
   // get loader for the store
   const loadFile = useLoader();
   // get the data from the store
@@ -97,15 +100,38 @@ export default function County({ county }) {
 
   // load schools for a county whenever county changes
   useEffect(() => {
-    loadFile({ file: `/${county}/schools.csv` });
-  }, [county]);
+    loadFile({ file: `/${currentCounty}/schools.csv` });
+  }, [currentCounty]);
 
   return (
     <ul>
       {allSchools.map((school) => (
         <li key={school.id}>{school.name}</li>
       ))}
-    </ll>
+    </ul>
   );
 }
+```
+
+### 2b. Use the store without React
+
+```js
+import { api } from "./store";
+
+// Get the file loader
+const loadFile = api.getState().loadFile;
+
+// subscribe to data in the state
+const unsub = api.subscribe(
+  // handler when data changes
+  (data) => console.log("data changed", data),
+  // listen to data changes
+  (state) => state.data
+);
+
+// Load a file
+loadFile({ file: `/${currentCounty}/schools.csv` });
+
+// Unsubscribe listeners with unsub()
+// Destroying the store (removing all listeners) with api.destroy()
 ```
